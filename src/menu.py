@@ -1,115 +1,74 @@
-def delete_usuario(nome, sobrenome):
-    #Delete
-    global db
-    mycol = db.usuario
-    myquery = {"nome": nome, "sobrenome":sobrenome}
-    mydoc = mycol.delete_one(myquery)
-    print("Deletado o usuário ",mydoc)
+from usuario.cadastrarUsuario import cadastrar_usuario
 
-def create_usuario():
-    #Insert
-    global db
-    mycol = db.usuario
-    print("\nInserindo um novo usuário")
-    nome = input("Nome: ")
-    sobrenome = input("Sobrenome: ")
-    cpf = input("CPF: ")
-    key = 1
-    end = []
-    while (key != 'N'):
-        rua = input("Rua: ")
-        num = input("Num: ")
-        bairro = input("Bairro: ")
-        cidade = input("Cidade: ")
-        estado = input("Estado: ")
-        cep = input("CEP: ")
-        endereco = {        #isso nao eh json, isso é chave-valor, eh um obj
-            "rua":rua,
-            "num": num,
-            "bairro": bairro,
-            "cidade": cidade,
-            "estado": estado,
-            "cep": cep
-        }
-        end.append(endereco) #estou inserindo na lista
-        key = input("Deseja cadastrar um novo endereço (S/N)? ")
-    mydoc = { "nome": nome, "sobrenome": sobrenome, "cpf": cpf, "end": end }
-    x = mycol.insert_one(mydoc)
-    print("Documento inserido com ID ",x.inserted_id)
+def menu ():
+    entrada = 11
+    sair = True
 
-def read_usuario(nome):
-    #Read
-    global db
-    mycol = db.usuario
-    print("Usuários existentes: ")
-    if not len(nome):
-        mydoc = mycol.find().sort("nome")
-        for x in mydoc:
-            print(x["nome"],x["cpf"])
-    else:
-        myquery = {"nome": nome}
-        mydoc = mycol.find(myquery)
-        for x in mydoc:
-            print(x)
+    while (sair):
+        print("Sistema de CRUD Mercado Livre")
+        print("1-Usuário")
+        print("2-Produto")
+        print("3-Vendedor")
+        print("4-Compra")
+        print("0-Sair")
+        entrada = input("Escolha uma opção: ")
 
-def update_usuario(nome):
-    #Read
-    global db
-    mycol = db.usuario
-    myquery = {"nome": nome}
-    mydoc = mycol.find_one(myquery)
-    print("Dados do usuário: ",mydoc)
-    nome = input("Mudar Nome:")
-    if len(nome):
-        mydoc["nome"] = nome
-
-    sobrenome = input("Mudar Sobrenome:")
-    if len(sobrenome):
-        mydoc["sobrenome"] = sobrenome
-
-    cpf = input("Mudar CPF:")
-    if len(cpf):
-        mydoc["cpf"] = cpf
-
-    newvalues = { "$set": mydoc }
-    mycol.update_one(myquery, newvalues)
-
-key = 0
-sub = 0
-while (key != 'S'):
-    print("1-CRUD Usuário")
-    print("2-CRUD Vendedor")
-    print("3-CRUD Produto")
-    key = input("Digite a opção desejada? (S para sair) ")
-
-    if (key == '1'):
-        print("Menu do Usuário")
-        print("1-Create Usuário")
-        print("2-Read Usuário")
-        print("3-Update Usuário")
-        print("4-Delete Usuário")
-        sub = input("Digite a opção desejada? (V para voltar) ")
-        if (sub == '1'):
-            print("Create usuario")
-            create_usuario()
+        if (entrada == '1'):
+            opcao_usuario = 11
+            print("Menu do Usuário")
+            print("1-Cadastrar usuário")
+            print("2-Listar todos os usuários")
+            print("3-Verificar dados de um usuário")
+            print("4-Editar usuário")
+            print("5-Deletar usuário")
+            print("0-Voltar")
+            opcao_usuario = input("Escolha uma opção: ")
+            if (opcao_usuario == '1'):
+                cadastrar_usuario()
+                
+            elif (opcao_usuario == '2'):
+                nome = input("Read usuário, deseja algum nome especifico? ")
+                read_usuario(nome)
             
-        elif (sub == '2'):
-            nome = input("Read usuário, deseja algum nome especifico? ")
-            read_usuario(nome)
-        
-        elif (sub == '3'):
-            nome = input("Update usuário, deseja algum nome especifico? ")
-            update_usuario(nome)
+            elif (opcao_usuario == '3'):
+                nome = input("Update usuário, deseja algum nome especifico? ")
+                update_usuario(nome)
 
-        elif (sub == '4'):
-            print("delete usuario")
-            nome = input("Nome a ser deletado: ")
-            sobrenome = input("Sobrenome a ser deletado: ")
-            delete_usuario(nome, sobrenome)
-            
-    elif (key == '2'):
-        print("Menu do Vendedor")        
-    elif (key == '3'):
-        print("Menu do Produto")        
+            elif (opcao_usuario == '4'):
+                print("delete usuario")
+                nome = input("Nome a ser deletado: ")
+                sobrenome = input("Sobrenome a ser deletado: ")
+                delete_usuario(nome, sobrenome)
+                
+        elif (input == '2'):
+            opcao_usuario = 11
+            print("Menu do Vendedor")   
+            print("1-Cadastrar vendedor")
+            print("2-Listar todos os vendedores")
+            print("3-Verificar dados de um vendedor")
+            print("4-Editar vendedor")
+            print("5-Deletar vendedor")
+            print("0-Voltar")
+        elif (input == '3'):
+            opcao_usuario = 11
+            print("Menu do Produto") 
+            print("1-Cadastrar produto")
+            print("2-Listar todos os produtos")
+            print("3-Verificar dados de produto")
+            print("4-Editar produto")
+            print("5-Deletar produto") 
+            print("0-Voltar")
+        elif (input == '4'):
+            opcao_usuario = 11
+            print("Menu de Compra")
+            print("1-Realizar uma compra")
+            print("2-Listar todas as compras")
+            print("3-Editar uma compra")
+            print("4-Excluir uma compra")
+            print("0-Voltar")
+        elif (input == '0'):
+            sair = False
+        else: 
+            print("Opção inválida!")      
 
-print("Tchau Prof...")
+    print("Tchau Prof...")
