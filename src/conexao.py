@@ -6,7 +6,8 @@ def conexao ():
 
     client = MongoClient(uri, server_api=ServerApi('1'))
     global db 
-    db = client.Cluster0
+    global mycol
+    db = client["Cluster0"]
 
     try:
         client.admin.command('ping')

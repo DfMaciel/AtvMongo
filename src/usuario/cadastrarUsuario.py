@@ -3,8 +3,8 @@ def cadastrar_usuario():
     mycol = db.usuario
     print("\nInserindo um novo usuário")
     nome = input("Nome: ")
-    sobrenome = input("Sobrenome: ")
-    cpf = input("CPF: ")
+    email = input("Email: ")
+    senha = input("Senha: ")
     key = 1
     end = []
     while (key != 'N'):

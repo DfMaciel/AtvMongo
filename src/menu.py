@@ -27,18 +27,24 @@ def menu ():
                 cadastrar_usuario()
                 
             elif (opcao_usuario == '2'):
-                nome = input("Read usuário, deseja algum nome especifico? ")
-                read_usuario(nome)
+                listar_usuarios()
             
             elif (opcao_usuario == '3'):
-                nome = input("Update usuário, deseja algum nome especifico? ")
-                update_usuario(nome)
+                listar_usuarios()
+                id = input("Insira o ID do usuário para ser visualizado: ")
+                visualizar_usuario(id)
 
             elif (opcao_usuario == '4'):
-                print("delete usuario")
-                nome = input("Nome a ser deletado: ")
-                sobrenome = input("Sobrenome a ser deletado: ")
-                delete_usuario(nome, sobrenome)
+                listar_usuarios()
+                id = input("Insira o ID do usuário para ser editado: ")
+                atualizar_usuario(id)
+
+            elif (opcao_usuario == '5'):
+                listar_usuarios()
+                id = input("Insira o ID do usuário para ser excluído: ")
+                excluir_usuario(id)
+            elif (opcao_usuario == '0'):
+                return
                 
         elif (input == '2'):
             opcao_usuario = 11
@@ -49,6 +55,30 @@ def menu ():
             print("4-Editar vendedor")
             print("5-Deletar vendedor")
             print("0-Voltar")
+            opcao_usuario = input("Escolha uma opção: ")
+            if (opcao_usuario == '1'):
+                cadastrar_vendedor()
+                
+            elif (opcao_usuario == '2'):
+                listar_vendedores()
+            
+            elif (opcao_usuario == '3'):
+                listar_vendedores()
+                id = input("Insira o ID do vendedor para ser visualizado: ")
+                visualizar_vendedor(id)
+
+            elif (opcao_usuario == '4'):
+                listar_vendedores()
+                id = input("Insira o ID do vendedor para ser editado: ")
+                atualizar_vendedor(id)
+
+            elif (opcao_usuario == '5'):
+                listar_vendedor()
+                id = input("Insira o ID do vendedor para ser excluído: ")
+                excluir_vendedor(id)
+            elif (opcao_usuario == '0'):
+                return
+            
         elif (input == '3'):
             opcao_usuario = 11
             print("Menu do Produto") 
