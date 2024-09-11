@@ -1,3 +1,5 @@
+from conexao import db
+
 def cadastrar_usuario():
     global db
     mycol = db.usuario
@@ -5,25 +7,30 @@ def cadastrar_usuario():
     nome = input("Nome: ")
     email = input("Email: ")
     senha = input("Senha: ")
-    key = 1
-    end = []
-    while (key != 'N'):
+    continuar = True
+    endereco = []
+    favoritos = []
+    compras = []
+    while (continuar):
         rua = input("Rua: ")
-        num = input("Num: ")
+        numero = input("Num: ")
         bairro = input("Bairro: ")
         cidade = input("Cidade: ")
         estado = input("Estado: ")
         cep = input("CEP: ")
-        endereco = {        #isso nao eh json, isso é chave-valor, eh um obj
+        endereco_inicial = {   
             "rua":rua,
-            "num": num,
+            "numero": numero,
             "bairro": bairro,
             "cidade": cidade,
             "estado": estado,
             "cep": cep
         }
-        end.append(endereco) #estou inserindo na lista
+        endereco.append(endereco_inicial)
         key = input("Deseja cadastrar um novo endereço (S/N)? ")
-    mydoc = { "nome": nome, "sobrenome": sobrenome, "cpf": cpf, "end": end }
+        if key in ['N', 'n']:
+            continuar = False
+            break
+    mydoc = { "nome": nome, "email": email, "senha": senha, "endereco": endereco, "favoritos": favoritos, "compras": compras}
     x = mycol.insert_one(mydoc)
     print("Documento inserido com ID ",x.inserted_id)
