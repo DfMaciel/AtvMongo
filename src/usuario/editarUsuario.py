@@ -41,7 +41,7 @@ def atualizar_usuario(id):
                     print("Senha inválida")
                     return
             elif (opcao == '4'):
-                endereco = []
+                endereco = resultado.get("endereco", [])
                 continuar = True
                 while (continuar):
                     rua = input("Rua: ")
@@ -59,9 +59,9 @@ def atualizar_usuario(id):
                         "cep": cep
                     }
                     endereco.append(endereco_inicial)
+                    mycol.update_one(myquery, {"$set": {"endereco": endereco}})
                     key = input("Deseja cadastrar um novo endereço (S/N)? ")
                     if key.upper() == 'N':
-                        mycol.update_one(myquery, {"$set": {"endereco": endereco}})
                         continuar = False
                         break
             # elif (opcao == '5'):

@@ -1,5 +1,5 @@
 from conexao import conexao
-from menu import menu
+from menus.menu import menu
 
 conexao()
 menu()
