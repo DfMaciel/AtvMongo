@@ -1,5 +1,8 @@
 from produto.cadastrarProduto import cadastrar_produto
 from produto.listarProdutos import listar_produtos
+from produto.visualizarProduto import visualizar_produto
+from produto.atualizar_produto import atualizar_produto
+from produto.excluirProduto import excluir_produto
 
 def produto_menu():
     menu = True
@@ -19,25 +22,26 @@ def produto_menu():
         elif (opcao_usuario == '2'):
             listar_produtos()
         
-        # elif (opcao_usuario == '3'):
-        #     id = input("Insira o ID do usuário para ser visualizado: ")
-        #     if (id):
-        #         visualizar_usuario(id)
-        #     else: 
-        #         print("ID inválido")
+        elif (opcao_usuario == '3'):
+            id = input("Insira o ID do produto para ser visualizado: ")
+            if (id):
+                visualizar_produto(id)
+            else: 
+                print("ID inválido")
 
-        # elif (opcao_usuario == '4'):
-        #     listar_usuarios()
-        #     id = input("Insira o ID do usuário para ser editado: ")
-        #     if (id):
-        #         atualizar_usuario(id)
-        #     else:
-        #         print("ID inválido")
+        elif (opcao_usuario == '4'):
+            listar_produtos()
+            id = input("Insira o ID do produtos para ser editado: ")
+            if (id):
+                atualizar_produto(id)
+            else:
+                print("ID inválido")
 
-        # elif (opcao_usuario == '5'):
-        #     listar_usuarios()
-        #     id = input("Insira o ID do usuário para ser excluído: ")
-        #     excluir_usuario(id)
+        elif (opcao_usuario == '5'):
+            listar_produtos()
+            id = input("Insira o ID do usuário para ser excluído: ")
+            excluir_produto(id)
+            
         elif (opcao_usuario == '0'):
             menu = False
             return
