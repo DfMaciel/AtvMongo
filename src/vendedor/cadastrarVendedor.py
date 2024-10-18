@@ -1,9 +1,9 @@
 from conexao import db
 
-def cadastrar_produto():
+def cadastrar_vendedor():
     global db
-    mycol = db.produto
-    print("\nInserindo um novo produto")
+    mycol = db.vendedor
+    print("\nInserindo um novo vendedor")
     nome = input("Nome: ")
     descricao = input("Descricao: ")
     preco = input("Preço: R$ ")
