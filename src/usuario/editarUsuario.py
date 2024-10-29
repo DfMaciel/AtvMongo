@@ -1,11 +1,16 @@
 from conexao import db
 from bson import ObjectId
+from bson.errors import InvalidId
 from usuario.formatacaoUsuario import formatacao_usuario
 
 def atualizar_usuario(id):
     global db 
     mycol = db.usuario
-    myquery = {"_id": ObjectId(id)}
+    try:
+        myquery = {"_id": ObjectId(id)}
+    except InvalidId:
+        print("ID inválido")
+        return
     resultado = mycol.find_one(myquery)
     if (resultado):
         print("Usuário encontrado: ")

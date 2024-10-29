@@ -1,15 +1,20 @@
 from conexao import db
 from bson import ObjectId
-from usuario.formatacaoUsuario import formatacao_usuario
+from bson.errors import InvalidId
+from produto.formatacaoProduto import formatacao_produto
 
 def atualizar_produto(id): 
     global db 
     mycol = db.produto
-    myquery = {"_id": ObjectId(id)}
+    try:
+        myquery = {"_id": ObjectId(id)}
+    except InvalidId:
+        print("ID inválido")
+        return
     resultado = mycol.find_one(myquery)
     if (resultado):
         print("Produto encontrado: ")
-        formatacao_usuario(resultado)
+        formatacao_produto(resultado)
         editar = True
         while(editar):
             print('1 - Editar nome')
@@ -60,5 +65,5 @@ def atualizar_produto(id):
             else:
                 print("Opção inválida")
     else: 
-        print("Usuário não encontrado")
+        print("Produto não encontrado")
         return

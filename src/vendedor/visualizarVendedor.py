@@ -1,11 +1,16 @@
 from conexao import db
 from bson import ObjectId
+from bson.errors import InvalidId
 from usuario.formatacaoUsuario import formatacao_usuario
 
 def visualizar_vendedores(id):
     global db
     mycol = db.vendedor
-    myquery = {"_id": ObjectId(id)}
+    try:
+        myquery = {"_id": ObjectId(id)}
+    except InvalidId:
+        print("ID inválido")
+        return
     resultado = mycol.find_one(myquery)
     if not resultado:
         print("Vendedor não encontrado")

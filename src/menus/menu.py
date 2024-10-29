@@ -1,5 +1,6 @@
 from menus.clienteMenu import cliente_menu
 from menus.produtoMenu import produto_menu
+from menus.vendedorMenu import vendedor_menu
 
 def menu ():
     entrada = 11
@@ -20,6 +21,9 @@ def menu ():
         elif (entrada == '2'):
             produto_menu()
             
+        elif (entrada == '3'):
+            vendedor_menu()
+        
         # elif (input == '3'):
         #     opcao_usuario = 11
         #     print("Menu do Produto") 
