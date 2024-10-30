@@ -2,10 +2,11 @@ from conexao import db
 from bson import ObjectId
 from bson.errors import InvalidId
 from usuario.formatacaoUsuario import formatacao_usuario
+from produto.listarProdutos import listar_produtos
 
 def atualizar_usuario(id):
     global db
-    mycol = db.produto
+    mycol = db.usuario
     try:
         myquery = {"_id": ObjectId(id)}
     except InvalidId:
@@ -53,16 +54,94 @@ def atualizar_usuario(id):
                     for item in enderecos:
                         print(item.capitalize(), ':', enderecos[item])
                     print('-----------------')
-                endereco_escolhido = input("Qual o cep do endereço a ser alterado?")
-            
+                edicao_endereco = True
+                while (edicao_endereco):
+                    print("Qual opção você deseja realizar?")
+                    print("1 - Adicionar endereço")
+                    print("2 - Remover endereço")
+                    print("0 - Voltar")
+                    opcao_endereco = input("Escolha uma opção: ")
+                    if (opcao_endereco == '1'):
+                        continuar = True
+                        while (continuar):
+                            lista_enderecos = resultado['endereco']
+                            rua = input("Rua: ")
+                            numero = input("Num: ")
+                            bairro = input("Bairro: ")
+                            cidade = input("Cidade: ")
+                            estado = input("Estado: ")
+                            cep = input("CEP: ")
+                            endereco_inicial = {   
+                                "rua":rua,
+                                "numero": numero,
+                                "bairro": bairro,
+                                "cidade": cidade,
+                                "estado": estado,
+                                "cep": cep
+                            }
+                            lista_enderecos.append(endereco_inicial)
+                            key = input("Deseja cadastrar um novo endereço (S/N)? ")
+                            if key in ['N', 'n']:
+                                continuar = False
+                                mycol.update_one(myquery, {"$set": {"endereco": lista_enderecos}})
+                                break
+                    elif (opcao_endereco == '2'):
+                        cep_escolhido = input("Qual o cep do endereço a ser alterado?")
+                        for endereco in resultado['endereco']:
+                            if (endereco['cep'] == cep_escolhido):
+                                resultado['endereco'].remove(endereco)
+                                mycol.update_one(myquery, {"$set": {"endereco": resultado['endereco']}})
+                                break
+                    elif (opcao_endereco == '0'):
+                        edicao_endereco = False
+                        return
+                    else:
+                        print("Opção inválida")
+                        return
 
             elif (opcao == '5'):
-                marca = input("Marca: ")
-                if (marca):
-                    mycol.update_one(myquery, {"$set": {"marca": marca}})
-                else:
-                    print("Marca inválida")
-                    return
+                print("Favoritos do usuário: ")
+                print('-----------------')
+                for favoritos in resultado['favoritos']:
+                    for item in favoritos:
+                        print(item.capitalize(), ':', favoritos[item])
+                    print('-----------------')
+                edicao_favoritos = True
+                while(edicao_favoritos):
+                    print("Qual opção você deseja realizar?")
+                    print("1 - Adicionar favorito")
+                    print("2 - Remover favorito")
+                    print("0 - Voltar")
+                    if (edicao_favoritos == '1'):
+                        listar_produtos()
+                        id_produto = input("Insira o ID do produto para ser adicionado: ")
+                        if (id_produto):
+                            myquery_produto = {"_id": ObjectId(id_produto)}
+                            produto = db.produto.find_one(myquery_produto)
+                            if (produto):
+                                lista_favoritos = resultado['favoritos']
+                                lista_favoritos.append(produto)
+                                mycol.update_one(myquery, {"$set": {"favoritos": lista_favoritos}})
+                                print(f"Produto {produto[nome]} adicionado aos favoritos")
+                            else:
+                                print("Produto não encontrado")
+                                return
+                        else:
+                            print("ID inválido")
+                            return
+                    elif (edicao_favoritos == 2):
+                        id_produto = input("Insira o ID do produto para ser removido: ")
+                        for favorito in resultado['favoritos']:
+                            if (favorito['id'] == id_produto):
+                                resultado['favoritos'].remove(favorito)
+                                mycol.update_one(myquery, {"$set": {"favoritos": resultado['favoritos']}})
+                                break
+                    elif (edicao_favoritos == '0'):
+                        edicao_favoritos = False
+                        return
+                    else:
+                        print("Opção inválida")
+                        return
             elif (opcao == '0'):
                 editar = False
                 return

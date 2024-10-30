@@ -1,13 +1,13 @@
 from conexao import db
-from usuario.formatacaoUsuario import formatacao_usuario
+from vendedor.formatacaoVendedor import formatacao_vendedor
 
 def listar_vendedores():
     print('Lista de vendedores: \n')
     global db
     mycol = db.vendedor
     resultado = mycol.find()
-    for usuario in resultado:
-        formatacao_usuario(usuario)
+    for vendedor in resultado:
+        formatacao_vendedor(vendedor)
         
     continuar = input("Pressione qualquer tecla para continuar...")
     if continuar:

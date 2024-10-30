@@ -1,8 +1,8 @@
-from produto.cadastrarProduto import cadastrar_produto
-from produto.listarProdutos import listar_produtos
-from produto.visualizarProduto import visualizar_produto
-from produto.atualizar_produto import atualizar_produto
-from produto.excluirProduto import excluir_produto
+from vendedor.cadastrarVendedor import cadastrar_vendedor
+from vendedor.listarVendedores import listar_vendedores
+from vendedor.visualizarVendedor import visualizar_vendedor
+from vendedor.atualizarVendedor import atualizar_vendedor
+from vendedor.excluirVendedor import excluir_vendedor
 
 def vendedor_menu():
     menu = True
@@ -17,30 +17,30 @@ def vendedor_menu():
         print("0-Voltar")
         opcao_usuario = input("Escolha uma opção: ")
         if (opcao_usuario == '1'):
-            cadastrar_produto()
+            cadastrar_vendedor()
             
         elif (opcao_usuario == '2'):
-            listar_produtos()
+            listar_vendedores()
         
         elif (opcao_usuario == '3'):
             id = input("Insira o ID do produto para ser visualizado: ")
             if (id):
-                visualizar_produto(id)
+                visualizar_vendedor(id)
             else: 
                 print("ID inválido")
 
         elif (opcao_usuario == '4'):
-            listar_produtos()
+            listar_vendedores()
             id = input("Insira o ID do produtos para ser editado: ")
             if (id):
-                atualizar_produto(id)
+                atualizar_vendedor(id)
             else:
                 print("ID inválido")
 
         elif (opcao_usuario == '5'):
-            listar_produtos()
+            listar_vendedores()
             id = input("Insira o ID do usuário para ser excluído: ")
-            excluir_produto(id)
+            excluir_vendedor(id)
             
         elif (opcao_usuario == '0'):
             menu = False

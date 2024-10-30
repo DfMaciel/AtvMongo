@@ -1,7 +1,7 @@
 from usuario.cadastrarUsuario import cadastrar_usuario
 from usuario.listarUsuarios import listar_usuarios
 from usuario.visualizarUsuario import visualizar_usuario
-from usuario.editarUsuario import atualizar_usuario
+from usuario.atualizarUsuario import atualizar_usuario
 from usuario.excluirUsuarios import excluir_usuario
 
 def cliente_menu():

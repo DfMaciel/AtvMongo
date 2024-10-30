@@ -1,9 +1,9 @@
 from conexao import db
 from bson import ObjectId
 from bson.errors import InvalidId
-from usuario.formatacaoUsuario import formatacao_usuario
+from vendedor.formatacaoVendedor import formatacao_vendedor
 
-def visualizar_vendedores(id):
+def visualizar_vendedor(id):
     global db
     mycol = db.vendedor
     try:
@@ -16,7 +16,7 @@ def visualizar_vendedores(id):
         print("Vendedor não encontrado")
         return
     else: 
-        formatacao_usuario(resultado)
+        formatacao_vendedor(resultado)
         continuar = input("Pressione qualquer tecla para continuar...")
         if continuar:
             return
