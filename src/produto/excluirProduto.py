@@ -2,7 +2,7 @@ from conexao import db
 from bson import ObjectId
 from bson.errors import InvalidId
 
-def excluir_produto():
+def excluir_produto(id):
     global db
     mycol = db.produto
     try:

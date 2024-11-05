@@ -43,14 +43,14 @@ def atualizar_produto(id):
                 if (preco):
                     mycol.update_one(myquery, {"$set": {"preco": preco}})
                 else:
-                    print("Preço inválida")
+                    print("Preço inválido")
                     return
             elif (opcao == '4'):
                 estoque = input("Estoque: ")
                 if (estoque):
                     mycol.update_one(myquery, {"$set": {"estoque": estoque}})
                 else:
-                    print("Estoque inválida")
+                    print("Estoque inválido")
                     return
             elif (opcao == '5'):
                 marca = input("Marca: ")

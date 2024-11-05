@@ -23,7 +23,7 @@ def vendedor_menu():
             listar_vendedores()
         
         elif (opcao_usuario == '3'):
-            id = input("Insira o ID do produto para ser visualizado: ")
+            id = input("Insira o ID do vendedor para ser visualizado: ")
             if (id):
                 visualizar_vendedor(id)
             else: 
@@ -31,7 +31,7 @@ def vendedor_menu():
 
         elif (opcao_usuario == '4'):
             listar_vendedores()
-            id = input("Insira o ID do produtos para ser editado: ")
+            id = input("Insira o ID do vendedor para ser editado: ")
             if (id):
                 atualizar_vendedor(id)
             else:
@@ -39,7 +39,7 @@ def vendedor_menu():
 
         elif (opcao_usuario == '5'):
             listar_vendedores()
-            id = input("Insira o ID do usuário para ser excluído: ")
+            id = input("Insira o ID do vendedor para ser excluído: ")
             excluir_vendedor(id)
             
         elif (opcao_usuario == '0'):

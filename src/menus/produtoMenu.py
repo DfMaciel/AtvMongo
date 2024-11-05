@@ -31,7 +31,7 @@ def produto_menu():
 
         elif (opcao_usuario == '4'):
             listar_produtos()
-            id = input("Insira o ID do produtos para ser editado: ")
+            id = input("Insira o ID do produto para ser editado: ")
             if (id):
                 atualizar_produto(id)
             else:
@@ -39,8 +39,11 @@ def produto_menu():
 
         elif (opcao_usuario == '5'):
             listar_produtos()
-            id = input("Insira o ID do usuário para ser excluído: ")
-            excluir_produto(id)
+            id = input("Insira o ID do produto para ser excluído: ")
+            if (id):
+                excluir_produto(id)
+            else:
+                print("ID inválido")
             
         elif (opcao_usuario == '0'):
             menu = False
