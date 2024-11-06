@@ -98,7 +98,6 @@ def atualizar_usuario(id):
                     else:
                         print("Opção inválida")
                         return
-
             elif (opcao == '5'):
                 print("Favoritos do usuário: ")
                 print('-----------------')
@@ -112,31 +111,40 @@ def atualizar_usuario(id):
                     print("1 - Adicionar favorito")
                     print("2 - Remover favorito")
                     print("0 - Voltar")
-                    if (edicao_favoritos == '1'):
+                    opcao_favoritos = input("Escolha uma opção: ")
+                    if (opcao_favoritos == '1'):
                         listar_produtos()
                         id_produto = input("Insira o ID do produto para ser adicionado: ")
                         if (id_produto):
                             myquery_produto = {"_id": ObjectId(id_produto)}
                             produto = db.produto.find_one(myquery_produto)
                             if (produto):
-                                lista_favoritos = resultado['favoritos']
-                                lista_favoritos.append(produto)
-                                mycol.update_one(myquery, {"$set": {"favoritos": lista_favoritos}})
-                                print(f"Produto {produto[nome]} adicionado aos favoritos")
+                                nome_vendedor = produto['vendedor']['nome']
+                                produto_novo = {
+                                    "_id": produto['_id'],
+                                    "produto": produto['produto'],
+                                    "preco": produto['preco'],
+                                    "descricao": produto['descricao'],
+                                    "estoque": produto['estoque'],
+                                    "vendedor": nome_vendedor,
+                                }
+                                resultado['favoritos'].append(produto_novo)
+                                mycol.update_one(myquery, {"$set": {"favoritos": resultado['favoritos']}})
+                                print(f"Produto {produto['produto']} adicionado aos favoritos")
                             else:
                                 print("Produto não encontrado")
                                 return
                         else:
                             print("ID inválido")
                             return
-                    elif (edicao_favoritos == 2):
+                    elif (opcao_favoritos == 2):
                         id_produto = input("Insira o ID do produto para ser removido: ")
                         for favorito in resultado['favoritos']:
                             if (favorito['id'] == id_produto):
                                 resultado['favoritos'].remove(favorito)
                                 mycol.update_one(myquery, {"$set": {"favoritos": resultado['favoritos']}})
                                 break
-                    elif (edicao_favoritos == '0'):
+                    elif (opcao_favoritos == '0'):
                         edicao_favoritos = False
                         return
                     else:

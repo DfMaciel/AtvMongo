@@ -16,3 +16,4 @@ def formatacao_vendedor(vendedor):
                 print('-----------------')
         else:
             print(dado.capitalize() , ':', vendedor[dado]) 
+    print('-----------------')
