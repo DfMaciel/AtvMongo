@@ -11,15 +11,17 @@ def add_favorite(user, userCol, productCol):
         
         if product:
             product_info = {
-                "_id":product["_id"],
-                "nome": product["nome"],
+                "_id": product["_id"],
+                "produto": product["produto"],
+                "descricao": product["descricao"],
+                "preco": product["preco"],
+                "estoque": product["estoque"],
                 "marca": product["marca"],
-                "valor": product["valor"],
                 "vendedor": {
-                    "_id":product["vendedor"]["_id"],
-                    "cnpj": product["vendedor"]["cnpj"], 
                     "nome": product["vendedor"]["nome"],
-                    "avaliacao": product["vendedor"]["avaliacao"]
+                    "email": product["vendedor"]["email"],
+                    "endereco": product["vendedor"]["endereco"],
+                    "telefone": product["vendedor"]["telefone"]
                 }
             }
             favorites_list.append(product_info)
@@ -32,10 +34,10 @@ def add_favorite(user, userCol, productCol):
     
     for fav in favorites_list:
         userCol.update_one(
-            {"cpf": user["cpf"]},
+            {"_id": user["_id"]},
             {"$push": {"favoritos": fav}}
         )
-    print("-="*20)
+    print("\n")
     print("Favorito adicionados com sucesso.")
 
 

@@ -18,7 +18,7 @@ def main():
     print("Bem vindo ao CRUD Mercado Livre")
     
     while True:
-        print("Menu Principal")
+        print("\nMenu Principal")
         print("1 - Gerenciar Produtos")
         print("2 - Gerenciar Compras")
         print("3 - Gerenciar Usuários")
@@ -34,7 +34,7 @@ def main():
         if opcao == 1:
             manager_product(produto, vendedor)
         elif opcao == 2:
-            manager_purchase(usuario, produto, compras)
+            manager_purchase(usuario, produto, compra)
         elif opcao == 3:
             manager_user(usuario, produto)
         elif opcao == 4:

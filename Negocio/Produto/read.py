@@ -36,11 +36,12 @@ def list_products(collection):
     mydoc = collection.find().sort("produto")
     products = list(mydoc)
     products_list = [{"id": str(product.get("_id")), "produto": product.get("produto"), "marca": product["marca"]} for product in products]
-    print("Lista de produtos:")
-    print("\n")
+    print("\nLista de produtos:")
+    print("-" * 60)
     for product in products_list:
-        print(f"ID: {product['id']}, Produto: {product['produto']}, Marca: {product['marca']}")
-    print("\n")
+        print(f"ID: {product['id']}")
+        print(f"Produto: {product['produto']} - Marca: {product['marca']}")
+        print("-" * 60)
 
 
     

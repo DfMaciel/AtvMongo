@@ -6,6 +6,7 @@ from Menu.Favoritos.favorito import manager_favorite
 
 def manager_user(usuarioCol, produtoCol):
     while True:
+        print("\nGerenciamento de Usuários")
         print("1 - Criar novo usuario")
         print("2 - Ver usuario específico")
         print("3 - Atualizar usuario")
@@ -23,19 +24,28 @@ def manager_user(usuarioCol, produtoCol):
             create_user(usuarioCol)
         elif opcao == 2:
             read_users(usuarioCol)
+            input("\nPressione Enter para continuar...")
             id = input("Digite a ID do usuario que deseja ver: ")
             if id:
                 read_user(id, usuarioCol)
+                input("\nPressione Enter para continuar...")
         elif opcao == 3:
             read_users(usuarioCol)
+            input("\nPressione Enter para continuar...")
             id = input("Digite a ID do usuario que deseja atualizar: ")
             if id:
                 update_user(id, usuarioCol)
+                input("\nPressione Enter para continuar...")
         elif opcao == 4:
+            read_users(usuarioCol)
+            input("\nPressione Enter para continuar...")
             id = input("Digite o id do usuario que deseja deletar: ")
             if id:
                 delete_user(id, usuarioCol)
+                input("\nPressione Enter para continuar...")
         elif opcao == 5:
+            read_users(usuarioCol)
+            input("\nPressione Enter para continuar...")
             id = input("Digite o id do usuario que deseja ver os favoritos: ")
             if id:
                 manager_favorite(id, usuarioCol, produtoCol)

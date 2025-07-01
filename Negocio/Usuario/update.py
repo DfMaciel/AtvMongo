@@ -5,13 +5,12 @@ def update_user(id, usuarioCol):
     if not user:
         print("Usuário não encontrado!")
         return
+    
+    print(f"Nome atual: {user.get('nome')}")
     novo_nome = input("Mudar Nome (ou Enter para manter): ")
-    if novo_nome:
-        user["nome"] = novo_nome
-
+    
+    print(f"Email atual: {user.get('email')}")
     email = input("Mudar E-mail (ou Enter para manter): ")
-    if email:
-        user["email"] = email
     print("\n")
     print(" Escolha uma opção: ")
     print("1 - Cadastrar novo endereço;")
@@ -80,6 +79,18 @@ def update_user(id, usuarioCol):
     else:
         print("\n")
         print("Nenhuma mudança feita no endereço.")
-    usuarioCol.update_one({"_id": user["_id"]}, {"$set": {"nome": user["nome"], "email": user["email"]}})
-    print("\n")
-    print("Dados atualizados com sucesso!")
+    
+    # Atualizar os campos do usuário no banco de dados
+    update_fields = {}
+    if novo_nome:
+        update_fields["nome"] = novo_nome
+    if email:
+        update_fields["email"] = email
+    
+    if update_fields:
+        usuarioCol.update_one({"_id": user["_id"]}, {"$set": update_fields})
+        print("\n")
+        print("Dados atualizados com sucesso!")
+    else:
+        print("\n")
+        print("Nenhuma alteração foi feita nos dados do usuário.")

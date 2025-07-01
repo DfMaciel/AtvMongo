@@ -8,7 +8,7 @@ def manager_favorite(id, usuarioCol, produtoCol):
     if not user:
         return print("Usuario não encontrado!")
     while True:
-        print("\n")
+        print("\nGerenciamento de Favoritos")
         print("1 - Exibir favoritos")
         print("2 - Adicionar produto aos favoritos")
         print("3 - Remover produto dos favoritos")
@@ -22,11 +22,16 @@ def manager_favorite(id, usuarioCol, produtoCol):
         
         if choice == 1:
             user = find_user(id, usuarioCol)
-            list_favorite(user)  
+            list_favorite(user)
+            input("\nPressione Enter para continuar...")
         elif choice == 2:
-            add_favorite(user, usuarioCol, produtoCol)  
+            user = find_user(id, usuarioCol)
+            add_favorite(user, usuarioCol, produtoCol)
+            input("\nPressione Enter para continuar...")
         elif choice == 3:
-            remove_favorite(user, usuarioCol, produtoCol) 
+            user = find_user(id, usuarioCol)
+            remove_favorite(user, usuarioCol, produtoCol)
+            input("\nPressione Enter para continuar...") 
         elif choice == 4:
             print("Saindo dos favoritos.")
             break

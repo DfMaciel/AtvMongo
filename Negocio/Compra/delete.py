@@ -1,15 +1,14 @@
 from helpers.utils import find_purchases 
 
 def delete_purchase(user, userCol, nota_fiscal, purCol):
-    print("-="*20)
+    print("\n")
     print("     Deletar Compra")
-    print("-="*20)
+    print("\n")
 
     purchase = find_purchases(nota_fiscal, purCol)
 
     if not purchase:
         return print(f"Compra com nota fiscal {nota_fiscal} não encontrada!")
-
 
     if purchase["status"] in ["Enviado", "Entregue"]:
         return print(f"Não é possível deletar uma compra com status '{purchase['status']}'!")

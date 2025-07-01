@@ -45,14 +45,14 @@ def register_address(id, collection, tipo):
         user = find_user(id,collection)
     if user:
         rua = input("Rua: ")
-        num = input("Num: ")
+        numero = input("Número: ")
         bairro = input("Bairro: ")
         cidade = input("Cidade: ")
         estado = input("Estado: ")
         cep = input("CEP: ")
         endereco = {        
             "rua":rua,
-            "numero": num,
+            "numero": numero,
             "bairro": bairro,
             "cidade": cidade,
             "estado": estado,
@@ -63,9 +63,7 @@ def register_address(id, collection, tipo):
 def list_addresses(user):
     addresses = user.get("endereco", [])
     if not addresses:
-        print("-="*20)
-        print("Não existem endereços cadastrados!")
-        print("-="*20)
+        print("\nNão existem endereços cadastrados!\n")
         return None
     return addresses
 
@@ -73,7 +71,7 @@ def generate_nota_fical():
     return str(uuid.uuid4())
 
 def calculate_final_value(product, quantity):
-    value_product = float(product.get("valor"))
+    value_product = float(product.get("preco"))
     final_value = value_product * quantity
     return round(final_value, 2)
 

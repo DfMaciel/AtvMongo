@@ -10,13 +10,13 @@ def create_user(userCol):
     while (key != 'n' and key != "nao"):
         cep = input("CEP: ")
         rua = input("Rua: ")
-        num = input("Número da casa: ")
+        numero = input("Número da casa: ")
         bairro = input("Bairro: ")
         cidade = input("Cidade: ")
         estado = input("Estado: ")
         endereco = {        
             "rua":rua,
-            "numero": num,
+            "numero": numero,
             "bairro": bairro,
             "cidade": cidade,
             "estado": estado,
